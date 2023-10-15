@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>Home</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+
+
+      <!-- {% static 'vendor/bootstrap/css/bootstrap.min.css' %} -->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/templatemo-edu-meeting.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/lightbox.css' %}">
+<!--
+
+TemplateMo 569 Edu Meeting
+
+https://templatemo.com/tm-569-edu-meeting
+
+-->
+  </head>
+
+<body>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- ***** Logo Start ***** -->
+                      <a href="{% url 'home' %}" class="logo">
+                          Reseñas de Baños
+                      </a>
+                      <!-- ***** Logo End ***** -->
+                      <!-- ***** Menu Start ***** -->
+                      <ul class="nav">
+                          {% if user.is_authenticated %}
+                            <li class="scroll-to-section"><a href="{% url 'home' %}" class="active">Home</a></li>
+                          {% endif %}
+                          <li class="scroll-to-section"><a href="{% url 'add_resennas' %}">¡Envía tu reseña!</a></li>
+                          <li><a href="{% url 'recommendedBannos' %}">Baños Recomendados</a></li>
+
+                           <li class="has-sub">
+                              <a href="javascript:void(0)">Ubicaciones</a>
+                              <ul class="sub-menu">
+                                  <li><a href="{% url '850' %}">850</a></li>
+                                  <li><a href="{% url '851' %}">851</a></li>
+                              </ul>
+                          </li>
+
+                          {% if user.is_authenticated %}
+                            <li class="scroll-to-section"><a href="{% url 'profile' user.id %}">Perfil</a></li>
+                          {% else %}
+                          <li><a href="{% url 'login' %}">Inicia sesión</a></li>
+                          <li><a href="{% url 'register' %}">Registrate</a></li>
+                          {% endif %}
+                          <!--
+                          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="logout">Cerrar sesión</button>
+        </form>
+                          -->
+
+                      </ul>        
+                      <a class='menu-trigger'>
+                          <span>Menu</span>
+                      </a>
+                      <!-- ***** Menu End ***** -->
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <section class="section main-banner" id="top" data-section="section1">
+      <video autoplay muted loop id="bg-video">
+         <!-- {% static 'assets/images/fcfm.mp4' %} -->
+          <source src="{% static 'assets/images/fcfm.mp4' %}" type="video/mp4" />
+      </video>
+
+      <div class="video-overlay header-text">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="caption">
+            {% if user.is_authenticated %}
+                    <h6>¡Hola {{user}}!</h6>
+            {% else %}
+                    <h6>¡Hola!</h6>
+            {% endif %}
+              <h2>Bienvenid@ a RESEÑAS DE BAÑOS BEAUCHEF</h2>
+              <p>Es el sitio donde puedes evaluar tu experiencia en los baños de la FCFM y ver las experiencias de otr@s usuari@s.</p>
+
+                    <!--
+                    <div class="main-button-red">
+                  <div class="scroll-to-section"><a href="#contact">Join Us Now!</a></div>
+              </div>
+              -->
+          </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </section>
+  <!-- ***** Main Banner Area End ***** -->
+
+  <section class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-service-item owl-carousel">
+
+            <div class="item" style="height: 250px;">
+              <div class="icon">
+                  <!-- {% static 'assets/images/851.jpg' %} -->
+                <img src="{% static 'assets/images/851.jpg' %}" alt="">
+              </div>
+              <div class="down-content">
+                <h4>851</h4>
+                <div class="scroll-to-section"><a href="{% url '851' %}">VER BAÑOS DE 851</a></div>
+                <p>Modernidad y comodidad en su máxima expresión, échales un vistazo;.</p>
+              </div>
+            </div>
+            
+            <div class="item"  style="height: 250px;">
+              <div class="icon">
+                  <!-- {% static 'assets/images/recomendado.png' %} -->
+                <img src="{% static 'assets/images/recomendado.png' %}" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Recomendados</h4>
+                <div class="scroll-to-section"> <a rel="nofollow" href="{% url 'recommendedBannos' %}">VER RECOMENDADOS</a></div>
+                <p>Los mejores baños a solo un click.</p>
+              </div>
+            </div>
+
+              <div class="item"  style="height: 250px;">
+                  <div class="icon">
+                      <!-- {% static 'assets/images/850.jpg' %} -->
+                      <img src="{% static 'assets/images/850.jpg' %}" alt="">
+                  </div>
+                  <div class="down-content">
+                      <h4>850</h4>
+                      <!-- {% static '/home' %} -->
+                      <div class="scroll-to-section"><a rel="nofollow" href="{% url '850' %}">VER BAÑOS DE 850</a></div>
+                      <p>Nada mejor que lo clásico, échales un vistazo;.</p>
+                  </div>
+              </div>
+
+              <div class="item" style="height: 250px;">
+                <div class="icon">
+                    <!-- {% static 'assets/images/850.jpg' %} -->
+                    <img src="{% static 'assets/images/icono-resenna.png' %}" alt="">
+                </div>
+                <div class="down-content">
+                    <h4>Todas las Reseñas</h4>
+                    <!-- {% static '/home' %} -->
+                    <div class="scroll-to-section"><a rel="nofollow" href="{% url 'recientes_resennas' %}">VER RESEÑAS</a></div>
+                    <p>Ordénalas y filtralas como quieras.</p>
+                </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="our-courses" id="courses">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="section-heading">
+                      <h2><a href="{% url 'recientes_resennas' %}">Últimas reseñas</a></h2>
+                  </div>
+              </div>
+              <div class="col-lg-12">
+                  <div class="owl-courses-item owl-carousel">
+
+                      {% for resenna in resennas %}
+
+
+                      <div class="item">
+
+                          <img src="{{resenna.banno.banno_img}}" alt="{{resenna.banno}}">
+                          <div class="down-content">
+                              <h4><a href="{% url 'Perfil de Baño' resenna.banno.id %}">{{resenna.banno}}</a></h4>
+                              <div class="info">
+                                  <div class="row">
+                                      <div class="col-8">
+                                          <ul>
+                                              <li><i class="fa fa-star"></i></li>
+                                              <li><p>{{resenna.valoracion_general}}</p> </li>
+                                          </ul>
+                                      </div>
+
+                                      <div class="col-4">
+                                          <span><a href="{% url 'profile' resenna.usuario.id %}">{{resenna.usuario}}</a></span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      {% endfor %}
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section class="contact-us" id="contact">
+
+      <div class="footer">
+          <p>Copyright © 2023 Baños Beauchef. All Rights Reserved.
+              <br>Diseño inspirado de: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
+             <br>Créditos del video: <a href="https://www.youtube.com/watch?v=JUpuVzuub8Y&ab_channel=FCFM-UChileTV" target="_parent" title="free css templates">FCFM-UChile TV</a></p>
+
+      </div>
+  </section>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+
+  <!-- {% static 'assets/js/custom.js' %} -->
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/lightbox.js' %}"></script>
+    <script src="{% static 'assets/js/tabs.js' %}"></script>
+    <script src="{% static 'assets/js/video.js' %}"></script>
+    <script src="{% static 'assets/js/slick-slider.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+    <script>
+        //according to loftblog tut
+        $('.nav li:first').addClass('active');
+
+        var showSection = function showSection(section, isAnimate) {
+          var
+          direction = section.replace(/#/, ''),
+          reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+          reqSectionPos = reqSection.offset().top - 0;
+
+          if (isAnimate) {
+            $('body, html').animate({
+              scrollTop: reqSectionPos },
+            800);
+          } else {
+            $('body, html').scrollTop(reqSectionPos);
+          }
+
+        };
+        /*
+        var checkSection = function checkSection() {
+          $('.section').each(function () {
+            var
+            $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+            if (topEdge < wScroll && bottomEdge > wScroll) {
+              var
+              currentId = $this.data('section'),
+              reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+              reqLink.closest('li').addClass('active').
+              siblings().removeClass('active');
+            }
+          });
+        };
+
+        $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+          e.preventDefault();
+          showSection($(this).attr('href'), true);
+        });
+
+        $(window).scroll(function () {
+          checkSection();
+        });
+
+         */
+    </script>
+
+</body>
+
+</body>
+</html>

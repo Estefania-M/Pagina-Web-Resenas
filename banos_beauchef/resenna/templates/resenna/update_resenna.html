@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+ 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Estilos de Bootstrap -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Estilos locales: -->
+    {% load static %}
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/templatemo-edu-meeting.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/lightbox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Modifica Tu Reseña</title>
+  </head> 
+  
+  <body class="resenna">
+    <header class="header-area header-sticky">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- ***** Logo Start ***** -->
+                      <a href="{% url 'home' %}" class="logo">
+                          Reseñas de Baños
+                      </a>
+                      <!-- ***** Logo End ***** -->
+                      <!-- ***** Menu Start ***** -->
+                      <ul class="nav">
+                        {% if user.is_authenticated %}
+                          <li class="scroll-to-section"><a href="{% url 'home' %}" >Home</a></li>
+                        {% endif %}
+                          <li class="scroll-to-section"><a href="{% url 'add_resennas' %}">¡Envía tu reseña!</a></li>
+                          <li><a href="{% url 'recommendedBannos' %}">Baños Recomendados</a></li>
+
+                           <li class="has-sub">
+                              <a href="javascript:void(0)">Ubicaciones</a>
+                              <ul class="sub-menu">
+                                  <li><a href="{% url '850' %}">850</a></li>
+                                  <li><a href="{% url '851' %}">851</a></li>
+                              </ul>
+                          </li>
+
+                          {% if user.is_authenticated %}
+                          <li class="scroll-to-section"><a href="{% url 'profile' user.id %}">Perfil</a></li>
+                          {% else %}
+                          <li><a href="{% url 'login' %}">Inicia sesión</a></li>
+                          <li><a href="{% url 'register' %}">Registrate</a></li>
+                          {% endif %}
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+  <section class="section main-banner" id="top" data-section="section1">
+    <video></video><div class="video-overlay header-text"></div>
+  </section>
+  <section>
+    <div class="shadow">
+      <h1>¡Modifica tu reseña!</h1>
+      {% if user.is_authenticated %}
+        {% if resenna.usuario == user %}
+          <form class="form_resenna" method="POST" onsubmit="return validacion()">
+            {% csrf_token %}
+            <h5>➤ Ubicación del baño a calificar</h5>
+            <div id="facultad">
+                <label for="facultad">Facultad:</label>
+                <select id="select_facultad" style="border: 2px solid red;">
+                  <option value="{{resenna.banno.ubicacion.direccion}}" selected>{{ resenna.banno.ubicacion.direccion }}</option>
+                </select>
+            </div>
+
+            <div id="departamento">
+                <label for="departamento">Edificio y Piso:</label>
+                <select id="select_departamento" style="border: 2px solid red;">
+                  <option value="{{resenna.banno.ubicacion}}" selected>{{resenna.banno.ubicacion}}</option>
+                </select>
+            </div>
+            <div id="banno" >
+              <label for="banno">Baño:</label>
+              <select id="select_banno" style="border: 2px solid red;" name="select_banno">
+                <option value="{{resenna.banno}}" selected>{{resenna.banno}}</option>
+              </select>
+            </div>
+
+            <br>
+
+            <div id="val_antiguas">
+              <script>
+                const datos_json = {"limpieza": "{{resenna.valoracion_limpieza}}",
+                                    "comodidad": "{{resenna.valoracion_comodidad}}",
+                                    "personas": "{{resenna.valoracion_disponibilidad}}",
+                                    "productos": "{{resenna.valoracion_utensilios}}"
+                                  }
+                const string = JSON.stringify(datos_json);
+                let val_a = document.getElementById("val_antiguas");
+                val_a.innerHTML = "<input hidden id='val_antiguas' name='val_antiguas' value="+string+">"
+              </script>
+            </div>
+            
+            <h5>➤ Modifique las calificaciones del baño en las siguientes categorias:</h5>
+            <h8>(En donde 1 estrella es pésimo servicio y 5 estrellas excelente servicio)</h8>
+            <br><br>
+            <div class="row" style="margin-left: 100px; margin-right: 100px;">
+              <div class="form-group col-lg-6">
+                <p id="limpieza">Limpieza</p>
+              </div>
+              <div class="form-group col-lg-6">
+                <div id="limpieza" class="calificacion">
+                  {% if resenna.valoracion_limpieza == 5 %}
+                    <input id="1l" type="radio" name="limpieza" value="5" checked><label style="cursor: pointer;" for="1l">★</label><input id="2l" type="radio" name="limpieza" value="4"><label style="cursor: pointer;" for="2l">★</label>
+                    <input id="3l" type="radio" name="limpieza" value="3"><label style="cursor: pointer;" for="3l">★</label><input id="4l" type="radio" name="limpieza" value="2"><label style="cursor: pointer;" for="4l">★</label><input id="5l" type="radio" name="limpieza" value="1"><label style="cursor: pointer;" for="5l">★</label>
+                  {% elif resenna.valoracion_limpieza == 4 %}
+                    <input id="1l" type="radio" name="limpieza" value="5"><label style="cursor: pointer;" for="1l">★</label><input id="2l" type="radio" name="limpieza" value="4" checked><label style="cursor: pointer;" for="2l">★</label>
+                    <input id="3l" type="radio" name="limpieza" value="3"><label style="cursor: pointer;" for="3l">★</label><input id="4l" type="radio" name="limpieza" value="2"><label style="cursor: pointer;" for="4l">★</label><input id="5l" type="radio" name="limpieza" value="1"><label style="cursor: pointer;" for="5l">★</label>
+                  {% elif resenna.valoracion_limpieza == 3 %}
+                    <input id="1l" type="radio" name="limpieza" value="5"><label style="cursor: pointer;" for="1l">★</label><input id="2l" type="radio" name="limpieza" value="4"><label style="cursor: pointer;" for="2l">★</label><input id="3l" type="radio" name="limpieza" value="3"checked><label style="cursor: pointer;" for="3l">★</label>
+                    <input id="4l" type="radio" name="limpieza" value="2"><label style="cursor: pointer;" for="4l">★</label><input id="5l" type="radio" name="limpieza" value="1"><label style="cursor: pointer;" for="5l">★</label>
+                  {% elif resenna.valoracion_limpieza == 2 %}
+                    <input id="1l" type="radio" name="limpieza" value="5"><label style="cursor: pointer;" for="1l">★</label><input id="2l" type="radio" name="limpieza" value="4"><label style="cursor: pointer;" for="2l">★</label>
+                    <input id="3l" type="radio" name="limpieza" value="3"><label style="cursor: pointer;" for="3l">★</label><input id="4l" type="radio" name="limpieza" value="2" checked><label style="cursor: pointer;" for="4l">★</label><input id="5l" type="radio" name="limpieza" value="1"><label style="cursor: pointer;" for="5l">★</label>
+                  {% elif resenna.valoracion_limpieza == 1 %}
+                    <input id="1l" type="radio" name="limpieza" value="5"><label style="cursor: pointer;" for="1l">★</label><input id="2l" type="radio" name="limpieza" value="4"><label style="cursor: pointer;" for="2l">★</label>
+                    <input id="3l" type="radio" name="limpieza" value="3"><label style="cursor: pointer;" for="3l">★</label><input id="4l" type="radio" name="limpieza" value="2"><label style="cursor: pointer;" for="4l">★</label><input id="5l" type="radio" name="limpieza" value="1"  checked><label style="cursor: pointer;" for="5l">★</label>
+                  {% endif %}
+                </div>
+              </div>
+              <div id="error_limpieza" ></div>
+            </div>
+            <div class="row" style="margin-left: 100px; margin-right: 100px;">
+              <div class="form-group col-lg-6">
+                <p id="comodidad">Comodidad</p>
+              </div>
+              <div class="form-group col-lg-6">
+                <div id="limpieza" class="calificacion">
+                  {% if resenna.valoracion_comodidad == 5 %}
+                  <input id="1c" type="radio" name="comodidad" value="5" checked><label style="cursor: pointer;" for="1c">★</label><input id="2c" type="radio" name="comodidad" value="4"><label style="cursor: pointer;" for="2c">★</label>
+                  <input id="3c" type="radio" name="comodidad" value="3"><label style="cursor: pointer;" for="3c">★</label><input id="4c" type="radio" name="comodidad" value="2"><label style="cursor: pointer;" for="4c">★</label><input id="5c" type="radio" name="comodidad" value="1"><label style="cursor: pointer;" for="5c">★</label>
+                  {% elif resenna.valoracion_comodidad == 4 %}
+                  <input id="1c" type="radio" name="comodidad" value="5"><label style="cursor: pointer;" for="1c">★</label><input id="2c" type="radio" name="comodidad" value="4" checked><label style="cursor: pointer;" for="2c">★</label>
+                  <input id="3c" type="radio" name="comodidad" value="3"><label style="cursor: pointer;" for="3c">★</label><input id="4c" type="radio" name="comodidad" value="2"><label style="cursor: pointer;" for="4c">★</label><input id="5c" type="radio" name="comodidad" value="1"><label style="cursor: pointer;" for="5c">★</label>
+                  {% elif resenna.valoracion_comodidad == 3 %}
+                  <input id="1c" type="radio" name="comodidad" value="5"><label style="cursor: pointer;" for="1c">★</label><input id="2c" type="radio" name="comodidad" value="4"><label style="cursor: pointer;" for="2c">★</label>
+                  <input id="3c" type="radio" name="comodidad" value="3" checked><label style="cursor: pointer;" for="3c">★</label><input id="4c" type="radio" name="comodidad" value="2"><label style="cursor: pointer;" for="4c">★</label><input id="5c" type="radio" name="comodidad" value="1"><label style="cursor: pointer;" for="5c">★</label>
+                  {% elif resenna.valoracion_comodidad == 2 %}
+                  <input id="1c" type="radio" name="comodidad" value="5"><label style="cursor: pointer;" for="1c">★</label><input id="2c" type="radio" name="comodidad" value="4"><label for="2c">★</label>
+                  <input id="3c" type="radio" name="comodidad" value="3"><label style="cursor: pointer;" for="3c">★</label><input id="4c" type="radio" name="comodidad" value="2" checked><label style="cursor: pointer;" for="4c">★</label><input id="5c" type="radio" name="comodidad" value="1"><label style="cursor: pointer;" for="5c">★</label>
+                  {% elif resenna.valoracion_comodidad == 1 %}
+                  <input id="1c" type="radio" name="comodidad" value="5"><label style="cursor: pointer;" for="1c">★</label><input id="2c" type="radio" name="comodidad" value="4"><label style="cursor: pointer;" for="2c">★</label>
+                  <input id="3c" type="radio" name="comodidad" value="3"><label style="cursor: pointer;" for="3c">★</label><input id="4c" type="radio" name="comodidad" value="2"><label style="cursor: pointer;" for="4c">★</label><input id="5c" type="radio" name="comodidad" value="1" checked><label style="cursor: pointer;" for="5c">★</label>
+                  {% endif %}
+                </div>
+              </div>
+              <div id="error_comodidad" ></div>
+            </div>
+            <div class="row" style="margin-left: 100px; margin-right: 100px;">
+              <div class="form-group col-lg-6">
+                <p id="comodidad">Disponibilidad</p>
+              </div>
+              <div class="form-group col-lg-6">
+                <div id="personas" class="calificacion">
+                  {% if resenna.valoracion_disponibilidad == 5 %}
+                  <input id="1p" type="radio" name="personas" value="5" checked><label style="cursor: pointer;" for="1p">★</label><input id="2p" type="radio" name="personas" value="4"><label style="cursor: pointer;" for="2p">★</label>
+                  <input id="3p" type="radio" name="personas" value="3"><label style="cursor: pointer;" for="3p">★</label><input id="4p" type="radio" name="personas" value="2"><label style="cursor: pointer;" for="4p">★</label><input id="5p" type="radio" name="personas" value="1"><label style="cursor: pointer;" for="5p">★</label>
+                  {% elif resenna.valoracion_disponibilidad == 4 %}
+                  <input id="1p" type="radio" name="personas" value="5"><label style="cursor: pointer;" for="1p">★</label><input id="2p" type="radio" name="personas" value="4" checked><label style="cursor: pointer;" for="2p">★</label>
+                  <input id="3p" type="radio" name="personas" value="3"><label style="cursor: pointer;" for="3p">★</label><input id="4p" type="radio" name="personas" value="2"><label style="cursor: pointer;" for="4p">★</label><input id="5p" type="radio" name="personas" value="1"><label style="cursor: pointer;" for="5p">★</label>
+                  {% elif resenna.valoracion_disponibilidad == 3 %}
+                  <input id="1p" type="radio" name="personas" value="5"><label style="cursor: pointer;" for="1p">★</label><input id="2p" type="radio" name="personas" value="4"><label style="cursor: pointer;" for="2p">★</label>
+                  <input id="3p" type="radio" name="personas" value="3" checked><label style="cursor: pointer;" for="3p">★</label><input id="4p" type="radio" name="personas" value="2"><label for="4p">★</label><input id="5p" type="radio" name="personas" value="1"><label style="cursor: pointer;" for="5p">★</label>
+                  {% elif resenna.valoracion_disponibilidad == 2 %}
+                  <input id="1p" type="radio" name="personas" value="5"><label style="cursor: pointer;" for="1p">★</label><input id="2p" type="radio" name="personas" value="4"><label style="cursor: pointer;" for="2p">★</label>
+                  <input id="3p" type="radio" name="personas" value="3"><label style="cursor: pointer;" for="3p">★</label><input id="4p" type="radio" name="personas" value="2" checked><label style="cursor: pointer;" for="4p">★</label><input id="5p" type="radio" name="personas" value="1"><label style="cursor: pointer;" for="5p">★</label>
+                  {% elif resenna.valoracion_disponibilidad == 1 %}
+                  <input id="1p" type="radio" name="personas" value="5"><label style="cursor: pointer;" for="1p">★</label><input id="2p" type="radio" name="personas" value="4"><label style="cursor: pointer;" for="2p">★</label>
+                  <input id="3p" type="radio" name="personas" value="3"><label style="cursor: pointer;" for="3p">★</label><input id="4p" type="radio" name="personas" value="2"><label style="cursor: pointer;" for="4p">★</label><input id="5p" type="radio" name="personas" value="1" checked><label style="cursor: pointer;" for="5p">★</label>
+                  {% endif %}
+                </div>
+              </div>
+              <div id="error_personas" ></div>
+            </div>
+            <div class="row" style="margin-left: 100px; margin-right: 100px;">
+              <div class="form-group col-lg-6">
+                <p id="comodidad">Productos del baño</p>
+              </div>
+              <div class="form-group col-lg-6">
+                <div id="productos" class="calificacion">
+                  {% if resenna.valoracion_utensilios == 5 %}
+                  <input id="1pr" type="radio" name="productos" value="5" checked><label style="cursor: pointer;" for="1pr">★</label><input id="2pr" type="radio" name="productos" value="4"><label style="cursor: pointer;" for="2pr">★</label>
+                  <input id="3pr" type="radio" name="productos" value="3"><label style="cursor: pointer;" for="3pr">★</label><input id="4pr" type="radio" name="productos" value="2"><label style="cursor: pointer;" for="4pr">★</label><input id="5pr" type="radio" name="productos" value="1"><label style="cursor: pointer;" for="5pr">★</label>
+                  {% elif resenna.valoracion_utensilios == 4 %}
+                  <input id="1pr" type="radio" name="productos" value="5"><label style="cursor: pointer;" for="1pr">★</label><input id="2pr" type="radio" name="productos" value="4" checked><label style="cursor: pointer;" for="2pr">★</label>
+                  <input id="3pr" type="radio" name="productos" value="3"><label style="cursor: pointer;" for="3pr">★</label><input id="4pr" type="radio" name="productos" value="2"><label style="cursor: pointer;" for="4pr">★</label><input id="5pr" type="radio" name="productos" value="1"><label style="cursor: pointer;" for="5pr">★</label>
+                  {% elif resenna.valoracion_utensilios == 3 %}
+                  <input id="1pr" type="radio" name="productos" value="5"><label style="cursor: pointer;" for="1pr">★</label><input id="2pr" type="radio" name="productos" value="4"><label style="cursor: pointer;" for="2pr">★</label>
+                  <input id="3pr" type="radio" name="productos" value="3" checked><label style="cursor: pointer;" for="3pr">★</label><input id="4pr" type="radio" name="productos" value="2"><label style="cursor: pointer;" for="4pr">★</label><input id="5pr" type="radio" name="productos" value="1"><label style="cursor: pointer;" for="5pr">★</label>
+                  {% elif resenna.valoracion_utensilios == 2 %}
+                  <input id="1pr" type="radio" name="productos" value="5"><label style="cursor: pointer;" for="1pr">★</label><input id="2pr" type="radio" name="productos" value="4"><label style="cursor: pointer;" for="2pr">★</label>
+                  <input id="3pr" type="radio" name="productos" value="3"><label style="cursor: pointer;" for="3pr">★</label><input id="4pr" type="radio" name="productos" value="2" checked><label style="cursor: pointer;" for="4pr">★</label><input id="5pr" type="radio" name="productos" value="1"><label style="cursor: pointer;" for="5pr">★</label>
+                  {% elif resenna.valoracion_utensilios == 1 %}
+                  <input id="1pr" type="radio" name="productos" value="5"><label style="cursor: pointer;" for="1pr">★</label><input id="2pr" type="radio" name="productos" value="4"><label style="cursor: pointer;" for="2pr">★</label>
+                  <input id="3pr" type="radio" name="productos" value="3"><label style="cursor: pointer;" for="3pr">★</label><input id="4pr" type="radio" name="productos" value="2"><label style="cursor: pointer;" for="4pr">★</label><input id="5pr" type="radio" name="productos" value="1" checked><label style="cursor: pointer;" for="5pr">★</label>
+                  {% endif %}
+                </div>
+              </div>
+              <div id="error_productos" ></div>
+            </div>
+
+            <div id="resenna">
+              <h5>➤ Edite su reseña:</h5>
+              <textarea id="reseña" name="resenna" maxlength="300" rows="5">{{resenna.contenido}}</textarea>
+            </div>
+            <br>
+            <div class="row">
+              <div class="form-group col-lg-6">
+                <button type="submit" name="resennaUpdate" class="btn btn-primary">Modificar</button>
+              </div>
+              <div class="form-group col-lg-6">
+                <a href="/home" class="btn btn-danger" type="button" style="width: 100%">Cancelar</a>
+              </div>
+            </div>
+          </form>
+        {% else %}
+          <div class="no_register">
+            <div class="row">
+              <div class="form-group col-lg-4" style="text-align: left;">
+                <img src="{% static 'img/error_permiso.svg' %}" alt="no-register" style="width: 200px; height: 200px;" >
+              </div>
+              <div class="form-group col-lg-6" style="text-align: center; margin-top: 50px; margin-left: 50px;">
+                <h5>¡¡ No puedes editar esta reseña, no eres el propietario !!</h5>
+                <br>
+                <h8>Edita tus reseñas desde <a href="{% url 'profile' user.id %}">aquí</a></h8>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="no_register">
+          <div class="row">
+            <div class="form-group col-lg-4" style="text-align: left;">
+              <img src="{% static 'img/error_registro.svg' %}" alt="no-register" style="width: 200px; height: 200px;" >
+            </div>
+            <div class="form-group col-lg-6" style="text-align: center; margin-top: 50px; margin-left: 50px;">
+              <h5>¡¡ Debe iniciar sesion para crear una reseña !!</h5>
+              <br>
+              <h8>Inicia sesión desde <a href="{% url 'login' %}">aquí</a></h8>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+  <section class="contact-us" id="contact" style="margin-top: 0px;">
+    <div class="footer">
+        <p>Copyright © 2023 Baños Beauchef. All Rights Reserved.
+    </div>
+  </section>
+    <!--Script de validación del formulario por el lado del cliente-->
+    <script>
+      function validacion(){
+        let e_l = document.getElementById('error_limpieza')
+        let e_c = document.getElementById('error_comodidad')
+        let e_p = document.getElementById('error_personas')
+        let e_pr = document.getElementById('error_productos')
+        let validacion = true;
+        if(!document.querySelector('input[name="limpieza"]:checked')) {
+          error_l = '<p> Tiene que calificar la limpieza del baño. </p>'
+          validacion = false; 
+          document.getElementById('error_limpieza').style.color = "red"
+        } else { error_l = '' 
+        }
+        if(!document.querySelector('input[name="comodidad"]:checked')) {
+          error_c = '<p> Tiene que calificar la comodidad del baño. </p>'
+          validacion = false; 
+          document.getElementById('error_comodidad').style.color = "red"
+        } else { error_c = '' 
+        }
+        if(!document.querySelector('input[name="personas"]:checked')) {
+          error_p = '<p> Tiene que calificar la disponibilidad (flujo de personas) del baño. </p>'
+          validacion = false; 
+          document.getElementById('error_personas').style.color = "red"
+        } else { error_p = '' 
+        }
+        if(!document.querySelector('input[name="productos"]:checked')) {
+          error_pr = '<p> Tiene que calificar la diponibilidad de productos (papel higénico, jabón, etc.) del baño. </p>'
+          validacion = false; 
+          document.getElementById('error_productos').style.color = "red"
+        } else { error_pr = '' 
+        }
+        e_l.innerHTML = error_l;
+        e_c.innerHTML = error_c;
+        e_p.innerHTML = error_p;
+        e_pr.innerHTML = error_pr;
+        return validacion
+      }
+    </script>
+
+       
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/isotope.min.js' %}"></script>
+<script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+<script src="{% static 'assets/js/lightbox.js' %}"></script>
+<script src="{% static 'assets/js/tabs.js' %}"></script>
+<script src="{% static 'assets/js/video.js' %}"></script>
+<script src="{% static 'assets/js/slick-slider.js' %}"></script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+
+  <script>
+    //according to loftblog tut
+    $('.nav li:first').addClass('active');
+
+    var showSection = function showSection(section, isAnimate) {
+      var
+      direction = section.replace(/#/, ''),
+      reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+      reqSectionPos = reqSection.offset().top - 0;
+
+      if (isAnimate) {
+        $('body, html').animate({
+          scrollTop: reqSectionPos },
+        600);
+      } else {
+        $('body, html').scrollTop(reqSectionPos);
+      }
+
+    };
+    </script>
+  </body>
+</html>

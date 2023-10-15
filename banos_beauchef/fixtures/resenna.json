@@ -1,0 +1,242 @@
+[
+{
+    "model": "resenna.resenna",
+    "pk": 1,
+    "fields": {
+        "banno": 10,
+        "usuario": 1,
+        "contenido": "Poco flujo de gente, el piso de algunos baños se encontraban mojados y no había jabón, pero si papel higiénico en todos los baños. Bastante cómodo.",
+        "valoracion_general": 4.2,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 3,
+        "valoracion_disponibilidad": 5,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 2,
+    "fields": {
+        "banno": 10,
+        "usuario": 2,
+        "contenido": "Estaba bastante mojado el lavamos y tuve que esperar para entrar (había mucha gente). Faltaba confort en un baño.\r\nVolví a ir en la tarde y se encontraba mucho más limpio y vacío.",
+        "valoracion_general": 4.2,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 4,
+        "valoracion_disponibilidad": 4,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 3,
+    "fields": {
+        "banno": 8,
+        "usuario": 4,
+        "contenido": "Habían malos olores, y faltaba jabón. Casi siempre está vacío.",
+        "valoracion_general": 3.8,
+        "valoracion_limpieza": 3,
+        "valoracion_utensilios": 3,
+        "valoracion_disponibilidad": 5,
+        "valoracion_comodidad": 4,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 4,
+    "fields": {
+        "banno": 3,
+        "usuario": 4,
+        "contenido": "Casi siempre está lleno (hay pocos baños), piso húmedo, no siempre hay jabón ni papel para secarse las manos.",
+        "valoracion_general": 3.2,
+        "valoracion_limpieza": 3,
+        "valoracion_utensilios": 3,
+        "valoracion_disponibilidad": 2,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 5,
+    "fields": {
+        "banno": 2,
+        "usuario": 4,
+        "contenido": "Hay horarios en que no hay confort en los baños. No es muy cómodo.",
+        "valoracion_general": 3.5,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 3,
+        "valoracion_disponibilidad": 4,
+        "valoracion_comodidad": 3,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 6,
+    "fields": {
+        "banno": 5,
+        "usuario": 4,
+        "contenido": "Es un poco pequeño si vas con bolso deportivo, o mochila. Apto solo para 2 personas.",
+        "valoracion_general": 4.2,
+        "valoracion_limpieza": 5,
+        "valoracion_utensilios": 5,
+        "valoracion_disponibilidad": 4,
+        "valoracion_comodidad": 3,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 7,
+    "fields": {
+        "banno": 1,
+        "usuario": 2,
+        "contenido": "Me gustó bastante que sea no binario. Todo excelente, excepto que faltaba ventilación las veces que fui, por lo que le quité una estrella en limpieza.",
+        "valoracion_general": 4.8,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 5,
+        "valoracion_disponibilidad": 5,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 8,
+    "fields": {
+        "banno": 6,
+        "usuario": 2,
+        "contenido": "No muy limpio, lavamanos muy sucio incluyendo el espejo. En algunos horarios se encuentra llenísimo. Falta papel para secarse.",
+        "valoracion_general": 3.5,
+        "valoracion_limpieza": 2,
+        "valoracion_utensilios": 4,
+        "valoracion_disponibilidad": 4,
+        "valoracion_comodidad": 4,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 9,
+    "fields": {
+        "banno": 9,
+        "usuario": 2,
+        "contenido": "A veces se llena. Varias llaves del lavamanos no funcionaban.",
+        "valoracion_general": 4.2,
+        "valoracion_limpieza": 5,
+        "valoracion_utensilios": 3,
+        "valoracion_disponibilidad": 4,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 10,
+    "fields": {
+        "banno": 1,
+        "usuario": 5,
+        "contenido": "Me gustó bastante, todo muy bueno.",
+        "valoracion_general": 5.0,
+        "valoracion_limpieza": 5,
+        "valoracion_utensilios": 5,
+        "valoracion_disponibilidad": 5,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 11,
+    "fields": {
+        "banno": 2,
+        "usuario": 3,
+        "contenido": "No había jabón ni confort.",
+        "valoracion_general": 3.5,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 1,
+        "valoracion_disponibilidad": 4,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 12,
+    "fields": {
+        "banno": 4,
+        "usuario": 3,
+        "contenido": "No muy cómodo, pequeño para mi gusto y faltaba ventilación.",
+        "valoracion_general": 3.8,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 4,
+        "valoracion_disponibilidad": 5,
+        "valoracion_comodidad": 2,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 13,
+    "fields": {
+        "banno": 1,
+        "usuario": 3,
+        "contenido": "Cómodo, estaba un poco lleno, ya que al ser un baño no binario van muchas más personas, además se encontraba un poco mojado.",
+        "valoracion_general": 4.2,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 5,
+        "valoracion_disponibilidad": 3,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 14,
+    "fields": {
+        "banno": 7,
+        "usuario": 5,
+        "contenido": "Faltaba confort en uno de los baños. Lavamanos bastante húmedo.",
+        "valoracion_general": 4.2,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 4,
+        "valoracion_disponibilidad": 4,
+        "valoracion_comodidad": 5,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+},
+{
+    "model": "resenna.resenna",
+    "pk": 15,
+    "fields": {
+        "banno": 6,
+        "usuario": 1,
+        "contenido": "Generalmente el lavamanos pasa bastante mojado, y el espejo igual. \r\nSe llena con facilidad, pero hay bloques en los que se encuentra vacío. \r\nLa última vez que fui no había papel para secarse las manos.",
+        "valoracion_general": 3.8,
+        "valoracion_limpieza": 4,
+        "valoracion_utensilios": 4,
+        "valoracion_disponibilidad": 3,
+        "valoracion_comodidad": 4,
+        "cantidad_de_valoracion_positiva": 0,
+        "cantidad_de_valoracion_negativa": 0
+    }
+}
+]

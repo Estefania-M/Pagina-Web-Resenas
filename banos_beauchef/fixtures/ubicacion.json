@@ -1,0 +1,65 @@
+[
+{
+    "model": "bannos.ubicacion",
+    "pk": 1,
+    "fields": {
+        "direccion": 850,
+        "edificio": "Física",
+        "piso": 1
+    }
+},
+{
+    "model": "bannos.ubicacion",
+    "pk": 2,
+    "fields": {
+        "direccion": 850,
+        "edificio": "Minas",
+        "piso": 1
+    }
+},
+{
+    "model": "bannos.ubicacion",
+    "pk": 3,
+    "fields": {
+        "direccion": 850,
+        "edificio": "Minas",
+        "piso": 2
+    }
+},
+{
+    "model": "bannos.ubicacion",
+    "pk": 4,
+    "fields": {
+        "direccion": 850,
+        "edificio": "Geología",
+        "piso": 2
+    }
+},
+{
+    "model": "bannos.ubicacion",
+    "pk": 5,
+    "fields": {
+        "direccion": 851,
+        "edificio": "Subterraneo",
+        "piso": -1
+    }
+},
+{
+    "model": "bannos.ubicacion",
+    "pk": 6,
+    "fields": {
+        "direccion": 851,
+        "edificio": "Subterraneo",
+        "piso": -2
+    }
+},
+{
+    "model": "bannos.ubicacion",
+    "pk": 7,
+    "fields": {
+        "direccion": 851,
+        "edificio": "Subterraneo",
+        "piso": -3
+    }
+}
+]

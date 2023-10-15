@@ -1,0 +1,122 @@
+[
+{
+    "model": "usuarios.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$gB1Mzs5s0JxRB2tRxgFez2$HjiUirL5jXicVLdgldsFm9EkwXlpOTE3E8p0YB7EKUE=",
+        "last_login": "2023-06-29T02:21:35.387Z",
+        "is_superuser": true,
+        "username": "Tiffa",
+        "first_name": "",
+        "last_name": "",
+        "email": "estefania.munoz.m@ug.uchile.cl",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-06-29T02:12:14Z",
+        "nombre": "Estefanía",
+        "apellido_pat": "Muñoz",
+        "apellido_mat": "Miranda",
+        "genero": "F",
+        "departamento": "Computación",
+        "user_img": "/static/img/profile3.png",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "usuarios.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$zLV2ZuptH0EdHuM50fQ2o5$/Yq3MU97esMM/Og8s7qj/S1KSxlQ+itN3CcQcK6XWQs=",
+        "last_login": "2023-06-29T02:17:05.962Z",
+        "is_superuser": false,
+        "username": "Lissy",
+        "first_name": "",
+        "last_name": "",
+        "email": "daniela.munoz.miranda@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-29T02:17:00.297Z",
+        "nombre": "Daniela",
+        "apellido_pat": "Muñoz",
+        "apellido_mat": "Miranda",
+        "genero": "F",
+        "departamento": "Industrial",
+        "user_img": "/static/img/profile1.png",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "usuarios.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$u1tbsdLiVtOZVEvMUgJ5yj$bMQangw/oIhKHboJRU2CRQ2/Kj5yxalUxTzc202eVGE=",
+        "last_login": "2023-06-29T02:18:35.437Z",
+        "is_superuser": false,
+        "username": "CarlosL",
+        "first_name": "",
+        "last_name": "",
+        "email": "carlos.lechuga@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-29T02:18:26.851Z",
+        "nombre": "Carlos",
+        "apellido_pat": "Lechuga",
+        "apellido_mat": "",
+        "genero": "M",
+        "departamento": "Biotecnología",
+        "user_img": "/static/img/profile5.png",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "usuarios.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$GIb7Bgn0mz1jAdO60bkIIz$SEhf7micmFxZW5o3zmL+LOPNK1h9a5Unj5Stgylt7Rk=",
+        "last_login": "2023-06-29T02:19:46.950Z",
+        "is_superuser": false,
+        "username": "Ariweldex",
+        "first_name": "",
+        "last_name": "",
+        "email": "arieldm17082000@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-29T02:19:21.773Z",
+        "nombre": "Ariel",
+        "apellido_pat": "Diaz",
+        "apellido_mat": "Mariman",
+        "genero": "M",
+        "departamento": "Eléctrica",
+        "user_img": "/static/img/profile4.png",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "usuarios.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$5rxuSpIqZdzaQWgIiLEizR$RSeCXEdE/j7BExUOzk4PFIdrhkqo95atAi7EYRFZLls=",
+        "last_login": "2023-06-29T02:21:01.001Z",
+        "is_superuser": false,
+        "username": "Fran17",
+        "first_name": "",
+        "last_name": "",
+        "email": "francisco.villa@ug.uchile.cl",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-29T02:20:52.743Z",
+        "nombre": "Francisco",
+        "apellido_pat": "Villa",
+        "apellido_mat": "",
+        "genero": "Otro",
+        "departamento": "Plan Común",
+        "user_img": "/static/img/profile2.png",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

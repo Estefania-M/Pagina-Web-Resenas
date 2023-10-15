@@ -1,0 +1,140 @@
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-contenido {
+background-color: #fefefe;
+margin: 10% auto;
+padding: 20px;
+border: 1px solid #888;
+width: 80%;
+}
+.close {
+float: right;
+font-size: 28px;
+font-weight: bold;
+cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+color: #000;
+text-decoration: none;
+cursor: pointer;
+}
+.selected{
+border: 2px solid blue;
+}
+.video-overlay {
+    background-color: rgba(235, 198, 197, 0);
+}
+.containerP {
+    display: flex;
+}
+
+.profile-column {
+    background-image: url('../img/fondo_a_u_resenna.jpg');
+    margin-left: 40px;
+    text-align: center;
+    border-radius:5%;
+    min-width: 300px;
+    max-width: 300px;    
+}
+
+#imgP{
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+}
+.profile-column img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.profile-column button{
+    margin-top: 10px;
+}
+
+.reviews-column{
+    margin-left: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reseña{
+    background-image: url('../img/fondo_recientes_resennas.png');
+    padding: 20px;
+    width: 700px;
+    margin-bottom: 20px;
+}
+
+
+/* Modal de Eliminar Reseña*/
+.delete-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+.delete-modal-content {
+    background-color: #ffcdcd;
+    text-align: center;
+    margin: auto;
+    padding: 30px;
+    border-radius: 0px;
+    border: 1px solid #ff0000;
+    width: 60%;
+}
+.close-modal-delete {
+    color: #000000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-modal-delete:hover,
+.close-modal-delete:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#star {
+    color:rgba(255, 255, 0, 0.603);
+}
+
+.botonup {
+    padding: 5px 10px; /* Ajustar el relleno (padding) del botón según sea necesario */
+    cursor: pointer; /* Establecer el cursor como puntero */
+}
+
+#title {
+    background: rgba(30, 30, 30, 1);
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 0px;
+    padding: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 250%;
+    color: #f5a425;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+}

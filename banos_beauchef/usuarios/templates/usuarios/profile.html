@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/templatemo-edu-meeting.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/lightbox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-bn.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styleprofile.css' %}">
+    
+</head>
+<body class="ver-bannos">
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="{% url 'home' %}" class="logo">
+                            Reseñas de Baños
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            {% if user.is_authenticated %}
+                                <li class="scroll-to-section"><a href="{% url 'home' %}" >Home</a></li>
+                            {% endif %}
+                            <li class="scroll-to-section"><a href="{% url 'add_resennas' %}">¡Envía tu reseña!</a></li>
+                            <li><a href="{% url 'recommendedBannos' %}">Baños Recomendados</a></li>
+  
+                             <li class="has-sub">
+                                <a href="javascript:void(0)">Ubicaciones</a>
+                                <ul class="sub-menu">
+                                    <li><a href="{% url '850' %}">850</a></li>
+                                    <li><a href="{% url '851' %}">851</a></li>
+                                </ul>
+                            </li>
+                            <!--usuario logeado-->
+                            {% if user.is_authenticated %}    
+                                <!--mi propio perfil-->
+                                {% if user.id == pk %}
+                                    <li class="scroll-to-section"><a href="{% url 'logout' %}" class="active">Cerrar sesión</a></li>
+                                <!--otro perfil-->
+                                {% elif pk is not null %}
+                                    <li class="scroll-to-section"><a href="{% url 'profile' pk %}" class="active">Perfil</a></li>
+                                <!--usuario no logeado-->
+                                {% else %}
+                                    <li><a href="{% url 'login' %}">Inicia sesión</a></li>
+                                    <li><a href="{% url 'register' %}">Registrate</a></li>
+                                {% endif %}    
+                            {% endif %}
+
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+    <section class="section main-banner" id="top" data-section="section1">
+        <video></video><div class="video-overlay header-text"></div>
+    </section>
+    <section>
+        <div class="containerP">
+            <div class="profile">
+                <div class="profile-column">
+                    <h1 id="title">Perfil de {{user.username}}</h1>
+                    <img src="{{user.user_img}}" id="imgP" alt="profilefoto" style="width: 200px; height: 200px;">
+                    <!--Distinción entre ver tu perfil y ver otro-->
+                    {% if user.id == pk %}
+                        <button id="changefoto" name="changefoto" type="button">Cambiar foto</button>
+                        <div id="modal1" class="modal">
+                            <div class="modal-contenido">
+                                <span class="close">&times;</span>
+                                <h2>Cambiar foto de perfil</h2>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <img src="{% static 'img/profile1.png' %}" alt="profilefoto1" class="profile-phto selected">
+                                    <img src="{% static 'img/profile2.png' %}" alt="profilefoto2" class="profile-phto">
+                                    <img src="{% static 'img/profile3.png' %}" alt="profilefoto3" class="profile-phto">
+                                    <img src="{% static 'img/profile4.png' %}" alt="profilefoto4" class="profile-phto">
+                                    <img src="{% static 'img/profile5.png' %}" alt="profilefoto5" class="profile-phto">
+                                    <!-- Cambio foto de perfil, como un usuario tiene ligada una dirección de una foto, se captura el src
+                                        y se cambia dinámicamente por la nueva-->
+                                    <input type="hidden" id="srcInput" name="srcInput" value="{% static 'img/profile1.png' %}">
+                                    <button type="submit" name="cambiofoto"> Cambiar foto</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}            
+                    <strong>
+                    <p>Nombre: {{user.nombre}} 
+                        {{user.apellido_pat}} 
+                        {{user.apellido_mat}}</p>
+                    <p>Departamento: {{user.departamento}}</p>
+                    <P>Email: {{user.email}}</p>
+                    </strong>
+                </div>
+            </div>
+            <div class="reviews-column">
+        {% for resenna in resennas %}
+            <div class="reseña">
+                <p><h4><a href="{% url 'Perfil de Baño' resenna.banno.id %}">{{resenna.banno.genero}}, {{resenna.banno.ubicacion}}</a>
+                     <i class="fa-solid fa-star" id="star"></i> {{resenna.valoracion_general}}</h4></p>
+                <!-- En la misma fila -->
+                <div class="row" style="align-items: center;">
+                    <!-- Contenido Resenna -->
+                    <p><strong>{{resenna.contenido}}</strong></p>
+                    <!-- Editar y Eliminar Resenna -->
+                    <!--Distinción entre ver tu perfil y ver otro-->
+                    {% if user.id == pk %}
+                        <div class="col-lg-1 ms-auto">
+                            <a href="{% url 'update_resennas' resenna.id_resenna %}">
+                            <button class="btn btn-warning" style="margin-bottom: 5px; ">
+                                <i class="fa fa-pencil" style="color:black;"></i>
+                            </button></a>
+                            <button id="btn-delete-modal" class="btn btn-danger"><i class="fa fa-trash"
+                                style="color:black;"></i></button>
+                                <!-- Modal Delete Resenna Content -->
+                                <div id="delete-modal"class="delete-modal">
+                                <div class="delete-modal-content">
+                                    <span class="close-modal-delete">&times;</span>
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <h2>¿Está seguro de eliminar esta reseña?</h2>
+                                        <img src="{% static 'img/confirmar_eliminar_resenna.svg' %}" alt="confirmar-delete" style="width: 200px; height: 200px;" >
+                                        <p style="text-align: center;">¡Recuerde que no podrá deshacer esta opción!</p>
+                                        <button type="submit" name="delete-resenna" class="btn btn-danger" style="width: 100%;">Sí, eliminar reseña</button>
+                                        <input type="hidden" id="idR" name="idR" value={{resenna.id_resenna}}>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-lg-2">
+                            <button class="botonup">
+                                <i class="fa-sharp fa-solid fa-thumbs-up" style="color: #125f11;"></i> {{resenna.cantidad_de_valoracion_positiva}}
+                            </button>
+                            <button class="botonup">
+                                <i class="fa-sharp fa-solid fa-thumbs-down" style="color: #9d0101;"></i> {{resenna.cantidad_de_valoracion_negativa}}
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+        {% endfor %}
+        </div>
+    
+    </section>
+    <section class="contact-us" id="contact">
+        <div class="footer">
+            <p>Copyright © 2023 Baños Beauchef. All Rights Reserved.
+        </div>
+    </section>
+
+    <script>
+        // Lógica del modal y el cambio de foto
+        let modal1 = document.getElementById("modal1");
+        let openModalButton = document.getElementById("changefoto");
+        var closeButton = document.getElementsByClassName("close")[0];
+
+        openModalButton.onclick = function() {
+        modal1.style.display = "block";
+        };
+
+        // Cierra el modal cuando se hace clic en la "x"
+        closeButton.onclick = function() {
+        modal1.style.display = "none";
+        };
+
+        // Cierra el modal cuando se hace clic fuera del contenido del modal
+        window.onclick = function(event) {
+        if (event.target == modal1) {
+            modal1.style.display = "none";
+        }
+        };
+        let photos = document.getElementsByClassName("profile-phto");
+
+        for (var i = 0; i < photos.length; i++) {
+            photos[i].addEventListener("click", function() {
+                // Remover la clase "selected-photo" de todas las fotos
+                for (var j = 0; j < photos.length; j++) {
+                    photos[j].classList.remove("selected");
+                }
+                // Agregar la clase "selected" a la foto seleccionada
+                this.classList.add("selected");
+                // Buscar la misma foto
+                let photo = document.getElementsByClassName("profile-phto selected")[0];
+                let srcInput = document.getElementById("srcInput");
+                // Capturar el atributo src de la imagen seleccionada 
+                srcInput.value = photo.getAttribute("src");
+        });
+        }
+
+        //Modal eliminar reseña
+        var modal_Delete = document.getElementById("delete-modal");
+        var btn_Delete = document.querySelectorAll(".btn.btn-danger");
+        var span_Close_Delete = document.getElementsByClassName("close-modal-delete")[0];
+        
+        btn_Delete.forEach(function(button) {
+            button.onclick = function() {
+                modal_Delete.style.display = "block";
+            }
+        });
+        span_Close_Delete.onclick = function() {
+            modal_Delete.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal_Delete) {
+                modal_Delete.style.display = "none";
+            }
+        }
+    </script>
+
+      <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+       
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/lightbox.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script src="{% static 'assets/js/video.js' %}"></script>
+  <script src="{% static 'assets/js/slick-slider.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+  
+    <script>
+      //according to loftblog tut
+      $('.nav li:first').addClass('active');
+  
+      var showSection = function showSection(section, isAnimate) {
+        var
+        direction = section.replace(/#/, ''),
+        reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+        reqSectionPos = reqSection.offset().top - 0;
+  
+        if (isAnimate) {
+          $('body, html').animate({
+            scrollTop: reqSectionPos },
+          600);
+        } else {
+          $('body, html').scrollTop(reqSectionPos);
+        }
+  
+      };
+      </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+[
+{
+    "model": "bannos.banno",
+    "pk": 1,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 2,
+        "genero": "No binario",
+        "valoracion_limpieza": 4.3,
+        "valoracion_utensilios": 5.0,
+        "valoracion_disponibilidad": 4.3,
+        "valoracion_comodidad": 5.0,
+        "valoracion_general": 4.6,
+        "num_resennas": 3,
+        "banno_img": "/static/assets/images/b1.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 2,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 3,
+        "genero": "Masculino",
+        "valoracion_limpieza": 4.0,
+        "valoracion_utensilios": 2.0,
+        "valoracion_disponibilidad": 4.0,
+        "valoracion_comodidad": 4.0,
+        "valoracion_general": 3.5,
+        "num_resennas": 2,
+        "banno_img": "/static/assets/images/b2.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 3,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 1,
+        "genero": "Masculino",
+        "valoracion_limpieza": 3.0,
+        "valoracion_utensilios": 3.0,
+        "valoracion_disponibilidad": 2.0,
+        "valoracion_comodidad": 5.0,
+        "valoracion_general": 3.2,
+        "num_resennas": 1,
+        "banno_img": "/static/assets/images/b3.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 4,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 4,
+        "genero": "Masculino",
+        "valoracion_limpieza": 4.0,
+        "valoracion_utensilios": 4.0,
+        "valoracion_disponibilidad": 5.0,
+        "valoracion_comodidad": 2.0,
+        "valoracion_general": 3.8,
+        "num_resennas": 1,
+        "banno_img": "/static/assets/images/b4.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 5,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 5,
+        "genero": "Masculino",
+        "valoracion_limpieza": 5.0,
+        "valoracion_utensilios": 5.0,
+        "valoracion_disponibilidad": 4.0,
+        "valoracion_comodidad": 3.0,
+        "valoracion_general": 4.2,
+        "num_resennas": 1,
+        "banno_img": "/static/assets/images/b5.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 6,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 5,
+        "genero": "Femenino",
+        "valoracion_limpieza": 3.0,
+        "valoracion_utensilios": 4.0,
+        "valoracion_disponibilidad": 3.5,
+        "valoracion_comodidad": 4.0,
+        "valoracion_general": 3.6,
+        "num_resennas": 2,
+        "banno_img": "/static/assets/images/b6.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 7,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 6,
+        "genero": "Masculino",
+        "valoracion_limpieza": 4.0,
+        "valoracion_utensilios": 4.0,
+        "valoracion_disponibilidad": 4.0,
+        "valoracion_comodidad": 5.0,
+        "valoracion_general": 4.2,
+        "num_resennas": 1,
+        "banno_img": "/static/assets/images/b7.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 8,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 7,
+        "genero": "Masculino",
+        "valoracion_limpieza": 3.0,
+        "valoracion_utensilios": 4.0,
+        "valoracion_disponibilidad": 5.0,
+        "valoracion_comodidad": 3.0,
+        "valoracion_general": 3.8,
+        "num_resennas": 1,
+        "banno_img": "/static/assets/images/b8.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 9,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 6,
+        "genero": "Femenino",
+        "valoracion_limpieza": 5.0,
+        "valoracion_utensilios": 3.0,
+        "valoracion_disponibilidad": 4.0,
+        "valoracion_comodidad": 5.0,
+        "valoracion_general": 4.2,
+        "num_resennas": 1,
+        "banno_img": "/static/assets/images/b9.jpg"
+    }
+},
+{
+    "model": "bannos.banno",
+    "pk": 10,
+    "fields": {
+        "descripcion": "",
+        "ubicacion": 7,
+        "genero": "Femenino",
+        "valoracion_limpieza": 4.0,
+        "valoracion_utensilios": 3.5,
+        "valoracion_disponibilidad": 4.5,
+        "valoracion_comodidad": 5.0,
+        "valoracion_general": 4.2,
+        "num_resennas": 2,
+        "banno_img": "/static/assets/images/b10.jpg"
+    }
+}
+]

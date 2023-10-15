@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+ 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Estilos de Bootstrap -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <!-- Estilos locales: -->
+    {% load static %}
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/templatemo-edu-meeting.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/lightbox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_co.css' %}">
+    <title>Comentar</title>
+  </head> 
+
+  <body class="resenna">
+    <header class="header-area header-sticky">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- ***** Logo Start ***** -->
+                      <a href="{% url 'home' %}" class="logo">
+                          Reseñas de baños
+                      </a>
+                      <!-- ***** Logo End ***** -->
+                      <!-- ***** Menu Start ***** -->
+                      <ul class="nav">
+                        {% if user.is_authenticated %}
+                          <li class="scroll-to-section"><a href="{% url 'home' %}" >Home</a></li>
+                        {% endif %}
+                          <li class="scroll-to-section"><a href="{% url 'add_resennas' %}">¡Envía tu reseña!</a></li>
+                          <li><a href="{% url 'recommendedBannos' %}">Baños Recomendados</a></li>
+
+                           <li class="has-sub">
+                              <a href="javascript:void(0)">Ubicaciones</a>
+                              <ul class="sub-menu">
+                                  <li><a href="{% url '850' %}">850</a></li>
+                                  <li><a href="{% url '851' %}">851</a></li>
+                              </ul>
+                          </li>
+
+                          {% if user.is_authenticated %}
+                          <li class="scroll-to-section"><a href="{% url 'profile' user.id %}">Perfil</a></li>
+                          {% else %}
+                          <li><a href="{% url 'login' %}">Inicia sesión</a></li>
+                          <li><a href="{% url 'register' %}">Registrate</a></li>
+                          {% endif %}
+                  </nav>
+              </div>
+          </div>
+      </div>
+    </header>
+  <!-- ***** Header Area End ***** -->
+    <section class="section main-banner" id="top" data-section="section1">
+      <video></video><div class="video-overlay header-text"></div>
+    </section>
+    <section>
+      <div class="shadow">
+        <h1>Modifica tu Comentario</h1>
+        {% if user.is_authenticated %}
+          <div class="form_resenna">
+            <!-- Aquí se mostrarán los comentarios -->
+            <h5>➤ Reseña</h5>
+            <div class="comment">
+              <div class="author">{{ usuario_resenna }}</div>
+              <div class="content">{{ contenido_resenna }}</div>
+            </div>
+            <br>
+            <form method="POST" onsubmit="return validacion()">
+              {% csrf_token %}
+              <h5>➤ Edite su comentario:</h5>
+              <div class="comment-form">
+                <textarea id="comment" name="comentario" placeholder="Escribe tu comentario...">{{ contenido_comentario }}</textarea>
+                <p id="comment-error" class="error-message"></p>
+              </div>
+              <br>
+              <div class="row">
+                <div class="form-group col-lg-6">
+                  <button type="submit" name="comentarioUpdate" class="btn btn-primary">Modificar</button>
+                </div>
+                <div class="form-group col-lg-6">
+                  <a href="/home" class="btn btn-danger" type="button" style="width: 100%">Cancelar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        {% else %}
+          <div class="no_register">
+            <div class="row">
+              <div class="form-group col-lg-4" style="text-align: left;">
+                <img src="{% static 'img/error_registro.svg' %}" alt="no-register" style="width: 200px; height: 200px;" >
+              </div>
+              <div class="form-group col-lg-6" style="text-align: center; margin-top: 50px; margin-left: 50px;">
+                <h5>¡¡ Debe iniciar sesion para crear un comentario !!</h5>
+                <br>
+                <h8>Inicia sesión desde <a href="{% url 'login' %}">aquí</a></h8>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </section>
+    <section class="contact-us" id="contact" style="margin-top: 0px;">
+      <div class="footer">
+          <p>Copyright © 2023 Baños Beauchef. All Rights Reserved.
+      </div>
+    </section>
+  
+    <!--Script de validación del formulario por el lado del cliente-->
+    <script>
+      function validacion() {
+            var comentario = document.getElementById("comment").value;
+            var errorMessage = document.getElementById("comment-error");
+
+            if (comentario === "") {
+                errorMessage.innerHTML = "Tiene que escribir un comentario.";
+                errorMessage.style.display = "block";
+                return false;
+            } else {
+                errorMessage.style.display = "none";
+                return true;
+            }
+        }
+    </script>
+    
+  </body>
+</html>

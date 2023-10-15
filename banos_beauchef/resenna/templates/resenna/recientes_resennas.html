@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+ 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Estilos de Bootstrap -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Estilos locales: -->
+    {% load static %}
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/templatemo-edu-meeting.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/lightbox.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Reseñas</title>
+  </head> 
+  
+  <body class="ver-resennas">
+    <header class="header-area header-sticky">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- ***** Logo Start ***** -->
+                      <a href="{% url 'home' %}" class="logo">
+                          Reseñas de Baños
+                      </a>
+                      <!-- ***** Logo End ***** -->
+                      <!-- ***** Menu Start ***** -->
+                      <ul class="nav">
+                        {% if user.is_authenticated %}
+                          <li class="scroll-to-section"><a href="{% url 'home' %}" >Home</a></li>
+                        {% endif %}
+                          <li class="scroll-to-section"><a href="{% url 'add_resennas' %}">¡Envía tu reseña!</a></li>
+                          <li><a href="{% url 'recommendedBannos' %}">Baños Recomendados</a></li>
+
+                           <li class="has-sub">
+                              <a href="javascript:void(0)">Ubicaciones</a>
+                              <ul class="sub-menu">
+                                  <li><a href="{% url '850' %}">850</a></li>
+                                  <li><a href="{% url '851' %}">851</a></li>
+                              </ul>
+                          </li>
+
+                          {% if user.is_authenticated %}
+                          <li class="scroll-to-section"><a href="{% url 'profile' user.id %}">Perfil</a></li>
+                          {% else %}
+                          <li><a href="{% url 'login' %}">Inicia sesión</a></li>
+                          <li><a href="{% url 'register' %}">Registrate</a></li>
+                          {% endif %}
+                          <!--
+                          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="logout">Cerrar sesión</button>
+        </form>
+                          -->
+
+                      </ul>        
+                      <a class='menu-trigger'>
+                          <span>Menu</span>
+                      </a>
+                      <!-- ***** Menu End ***** -->
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+  <section class="section main-banner" id="top" data-section="section1">
+    <video></video><div class="video-overlay header-text"></div>
+  </section>
+  <section>
+      <form class="form-filtro-resenna" method="POST">
+        {% csrf_token %}
+        <div class="row" style="justify-content: center; text-align: center; align-items: center; margin: 0px;">
+          <div class="form-group col-lg-2">
+            <p style="color: white; text-align:center; padding: 0px; margin: 0px; font-size: 18px;">Filtra las Reseñas</p>
+          </div>
+          <div id="orden" class="form-group col-lg-3">
+            <select id="select_orden" name="select_orden" class="filtro-resenna" style="text-align: center; margin: 0px; cursor: pointer;">
+              <script>
+                let orden = document.getElementById("select_orden");
+                if ("{{orden}}" == "antigua"){
+                  select = ['', 'selected']
+                }else{
+                  select = ['selected', '']
+                }
+                f_orden = "<option class='filtro-resenna' value='Más Recientes'"+ select[0] +">Más Recientes</option>"
+                f_orden += "<option class='filtro-resenna' value='Más Antiguas'"+ select[1] +">Más Antiguas</option>"
+                orden.innerHTML = f_orden + "</select>";
+              </script>
+            </select>
+          </div>
+          <div id="banno" class="form-group col-lg-3">
+            <select id="select_bannos" name="select_bannos" class="filtro-resenna" style="text-align: center; margin: 0px; cursor: pointer;">
+              <script>
+                let banno = document.getElementById("select_bannos");
+                if ("{{banno}}" == "850"){
+                  select = ['', 'selected', '']
+                }else if ("{{banno}}" == "851"){
+                  select = ['', '', 'selected']
+                }else{
+                  select = ['selected', '', '']
+                }
+                f_banno = "<option class='filtro-resenna' value='Todos los Baños'"+ select[0] +">Todos los Baños</option>"
+                f_banno += "<option class='filtro-resenna' value='850'"+ select[1] +">Baños de 850</option>"
+                f_banno += "<option class='filtro-resenna' value='851'"+ select[2] +">Baños de 851</option>"
+                banno.innerHTML = f_banno  + "</select>";
+              </script>
+            </select>
+          </div>
+          <div id="envio" class="form-group col-lg-2">
+            <button type="submit" name="filtro-resenna" class="filtro-resenna" style="justify-content: center;">
+              Aplicar</button>
+          </div>
+        </div>
+      </form>
+      
+      {% if orden == "reciente" %}
+        {% for resenna in resennas reversed%}
+          <div class="shadow-resenna">
+            <div class="row">
+              <div class="col-lg-10">
+                <h3><a href="{% url 'Perfil de Baño' resenna.banno.id %}" style="color: #000000;">
+                  <i class="fas fa-toilet" style="color: #000000;"></i>
+                  &nbsp; Baño {{resenna.banno.genero}}, ubicado en el {{resenna.banno.ubicacion}}</a>
+                </h3>
+              </div>
+              {% if user.is_authenticated %}
+                {% if user == resenna.usuario %}
+                  <div class="col-lg-1">
+                    <a href="{% url 'update_resennas' resenna.id_resenna %}">
+                    <button class="btn btn-warning" style="margin-bottom: 5px; cursor: pointer;">
+                      <i class="fa fa-pencil" style="color:black; width: 15px;"></i>
+                    </button></a>
+                  </div>
+                  <div class="col-lg-1">
+                    <button id="btn-delete-modal" class="btn btn-danger" style="cursor: pointer;"><i class="fa fa-trash"
+                      style="color:black; width: 15px;"></i></button>
+                      <!-- Modal content -->
+                      <div id="delete-modal"class="delete-modal">
+                        <div class="delete-modal-content">
+                          <span class="close-modal-delete" style="cursor: pointer;">&times;</span>
+                          <form action="" method="POST">
+                            {% csrf_token %}
+                            <h2>¿Estás seguro de eliminar esta reseña?</h2>
+                            <img src="{% static 'img/confirmar_eliminar_resenna.svg' %}" alt="confirmar-delete" style="width: 200px; height: 200px;" >
+                            <p style="text-align: center;">¡Recuerde que no podrá deshacer esta opción!</p>
+                            <button type="submit" name="delete-resenna" class="btn btn-danger" style="cursor: pointer;">Sí, eliminar reseña</button>
+                            <input type="hidden" id="idR" name="idR" value={{resenna.id_resenna}}>
+                          </form>
+                        </div>
+                      </div>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+            <br>
+            <div class="row" style="align-items: center; margin: 0px;">
+              <div class="form-group col-lg-1">
+                <img src="{{ resenna.usuario.user_img }}" id="user_img" style="width: 50px; height: 50px;">
+              </div>
+              <div id="orden" class="form-group col-lg-8" >
+                <h4><a href="{% url 'profile' resenna.usuario.id %}">{{resenna.usuario}}</a></h4>
+              </div>
+              <div id="banno" class="form-group col-lg-3">
+                <h4 style="margin-left: 0px; text-align: right;">{{resenna.valoracion_general}} / 5.0</h4>
+              </div>
+            </div>
+            <div class="wrapper">
+              <div class="">
+                <p id="limpieza" style="margin-bottom: 0px;">Limpieza:</p>
+              </div>
+              <div class="">
+                <div id="limpieza" class="ver-calificacion">
+                  {% if resenna.valoracion_limpieza == 5 %}
+                    <label for="5" class="cheked">★★★★★</label>
+                  {% elif resenna.valoracion_limpieza == 4 %}
+                    <label for="4" class="cheked">★★★★</label>
+                    <label for="4" class="in-cheked">★</label>
+                  {% elif resenna.valoracion_limpieza == 3 %}
+                    <label for="3" class="cheked">★★★</label>
+                    <label for="3" class="in-cheked">★★</label>
+                  {% elif resenna.valoracion_limpieza == 2 %}
+                    <label for="2" class="cheked">★★</label>
+                    <label for="2" class="in-cheked">★★★</label>
+                  {% elif resenna.valoracion_limpieza == 1 %}
+                    <label for="1" class="cheked">★</label>
+                    <label for="1" class="in-cheked">★★★★</label>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="">
+                <p id="comodidad" style="margin-bottom: 0px;">Comodidad:</p>
+              </div>
+              <div class="">
+                <div id="comodidad" class="ver-calificacion">
+                  {% if resenna.valoracion_comodidad == 5 %}
+                    <label for="5" class="cheked">★★★★★</label>
+                  {% elif resenna.valoracion_comodidad == 4 %}
+                    <label for="4" class="cheked">★★★★</label>
+                    <label for="4" class="in-cheked">★</label>
+                  {% elif resenna.valoracion_comodidad == 3 %}
+                    <label for="3" class="cheked">★★★</label>
+                    <label for="3" class="in-cheked">★★</label>
+                  {% elif resenna.valoracion_comodidad == 2 %}
+                    <label for="2" class="cheked">★★</label>
+                    <label for="2" class="in-cheked">★★★</label>
+                  {% elif resenna.valoracion_comodidad == 1 %}
+                    <label for="1" class="cheked"">★</label>
+                    <label for="1" class="in-cheked">★★★★</label>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="">
+                <p id="disponibilidad" style="margin-bottom: 0px;">Disponibilidad:</p>
+              </div>
+              <div class="">
+                <div id="disponibilidad" class="ver-calificacion">
+                  {% if resenna.valoracion_disponibilidad == 5 %}
+                    <label for="5" class="cheked">★★★★★</label>
+                  {% elif resenna.valoracion_disponibilidad == 4 %}
+                    <label for="4" class="cheked"">★★★★</label>
+                    <label for="4" class="in-cheked">★</label>
+                  {% elif resenna.valoracion_disponibilidad == 3 %}
+                    <label for="3" class="cheked"">★★★</label>
+                    <label for="3" class="in-cheked">★★</label>
+                  {% elif resenna.valoracion_disponibilidad == 2 %}
+                    <label for="2" class="cheked">★★</label>
+                    <label for="2" class="in-cheked">★★★</label>
+                  {% elif resenna.valoracion_disponibilidad == 1 %}
+                    <label for="1" class="cheked">★</label>
+                    <label for="1" class="in-cheked">★★★★</label>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="" >
+                <p id="comodidad" style="margin-bottom: 0px;">Utensilios:</p>
+              </div>
+              <div class="">
+                <div id="productos" class="ver-calificacion">
+                  {% if resenna.valoracion_utensilios == 5 %}
+                    <label for="5" class="cheked">★★★★★</label>
+                  {% elif resenna.valoracion_utensilios == 4 %}
+                    <label for="4" class="cheked">★★★★</label>
+                    <label for="4" class="in-cheked">★</label>
+                  {% elif resenna.valoracion_utensilios == 3 %}
+                    <label for="3" class="cheked">★★★</label>
+                    <label for="3" class="in-cheked">★★</label>
+                  {% elif resenna.valoracion_utensilios == 2 %}
+                    <label for="2" class="cheked">★★</label>
+                    <label for="2" class="in-cheked">★★★</label>
+                  {% elif resenna.valoracion_utensilios == 1 %}
+                    <label for="1" class="cheked">★</label>
+                    <label for="1" class="in-cheked">★★★★</label>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <h6>Comentarios: </h6>
+            <p style="justify-content: center;"> {{resenna.contenido}}</p>
+
+            <div class="row" style="justify-content: left; align-items: center;">
+              <div class="form-group col-lg-3">
+                <button id="btn-ver-comentarios" class="btn-ver-comentario" style="cursor: pointer; font-style: italic;">Mostrar Comentarios</button>
+              </div>
+              {% if user.is_authenticated %}
+              <div class="form-group col-lg-3">
+                <button id="btn-add-comentario" class="btn-add-comentario" style="cursor: pointer; font-style: italic;"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp; Responder</button>
+              </div>
+                {% if user != resenna.usuario %}
+                  <div class="form-group col-lg-4">
+                    <p style="margin: 0px; color: rgb(58, 44, 44); text-align: right;font-style: italic;">¿Te ha sido útil esta reseña? </p>
+                  </div>
+                  <div class="form-group col-lg-1" style="padding: 10px; justify-content: right;">
+                    <button style="cursor: pointer; justify-content: right;"><i class="fa-sharp fa-solid fa-thumbs-up" style="color: #125f11;"></i></button>
+                  </div>
+                  <div class="form-group col-lg-1" style="padding: 10px; justify-content: right;">
+                    <button style="cursor: pointer;"><i class="fa-sharp fa-solid fa-thumbs-down" style="color: #9d0101;"></i></button>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+
+          {% for comentario in comentarios %}
+            {% if comentario.resena.id_resenna == resenna.id_resenna %}
+            <div class="shadow-ver-comentario" id="shadow-ver-comentario">
+              <div class="row" style="align-items: center; margin: 0px;">
+                <div class="form-group col-lg-1">
+                  <img src="{{ comentario.usuario.user_img }}" id="user_img" style="width: 30px; height: 30px;">
+                </div>
+                <div id="orden" class="form-group col-lg-9" >
+                  <h6 style="margin-left: 0px; text-align: left;">{{comentario.usuario}}</h6>
+                </div>
+                {% if user.is_authenticated %}
+                  {% if user == comentario.usuario %}
+                    <div class="col-lg-1">
+                      <a href="{% url 'update_comentario' resenna.id_resenna comentario.id_comentario %}">
+                      <button class="btn btn-warning" style="width: 40px; height: 40px; margin-bottom: 5px; cursor: pointer;">
+                        <i class="fa fa-pencil" style="color:black; width: 15px; height: 15px;"></i>
+                      </button></a>
+                    </div>
+                    <div class="col-lg-1">
+                    <button id="btn-delete-modal" class="btn btn-danger" style="width: 40px; height: 40px;cursor: pointer;"><i class="fa fa-trash"
+                        style="color:black; width: 15px; height: 15px;"></i></button>
+                    </div>
+                  {% endif %}
+                {% endif %}
+              </div>
+              
+              <p style="margin-left: 10px">{{comentario.contenido}}</p>
+            </div>
+            {% endif %}
+          {% endfor %}
+
+          <div class="shadow-comentario" id="shadow-comentario">
+            <form class="formulario" method="POST">
+              {% csrf_token %}
+              <div class="comment-form">
+              <textarea maxlength="300" name="comentario" id="comment" placeholder="Escriba tu comentario..."></textarea>
+              <p id="comment-error" class="error-message"></p>
+              </div>
+              <input type="hidden" id="idR" name="idR" value={{resenna.id_resenna}}>
+              <button type="submit" name="comentarioAdd" class="btn btn-success">Comentar</button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% for resenna in resennas %}
+        <div class="shadow-resenna">
+          <div class="row">
+            <div class="col-lg-10">
+              <h3><a href="{% url 'Perfil de Baño' resenna.banno.id %}" style="color: #000000;">
+                <i class="fas fa-toilet" style="color: #000000;"></i>
+                &nbsp; Baño {{resenna.banno.genero}}, ubicado en el {{resenna.banno.ubicacion}}</a>
+              </h3>
+            </div>
+            {% if user.is_authenticated %}
+              {% if user == resenna.usuario %}
+                <div class="col-lg-1">
+                  <a href="{% url 'update_resennas' resenna.id_resenna %}">
+                  <button class="btn btn-warning" style="margin-bottom: 5px; cursor: pointer;">
+                    <i class="fa fa-pencil" style="color:black; width: 15px;"></i>
+                  </button></a>
+                </div>
+                <div class="col-lg-1">
+                  <button id="btn-delete-modal" class="btn btn-danger" style="cursor: pointer;"><i class="fa fa-trash"
+                    style="color:black; width: 15px;"></i></button>
+                    <!-- Modal content -->
+                    <div id="delete-modal"class="delete-modal">
+                      <div class="delete-modal-content">
+                        <span class="close-modal-delete" style="cursor: pointer;">&times;</span>
+                        <form action="" method="POST">
+                          {% csrf_token %}
+                          <h2>¿Estás seguro de eliminar esta reseña?</h2>
+                          <img src="{% static 'img/confirmar_eliminar_resenna.svg' %}" alt="confirmar-delete" style="width: 200px; height: 200px;" >
+                          <p style="text-align: center;">¡Recuerde que no podrá deshacer esta opción!</p>
+                          <button type="submit" name="delete-resenna" class="btn btn-danger" style="cursor: pointer;">Sí, eliminar reseña</button>
+                          <input type="hidden" id="idR" name="idR" value={{resenna.id_resenna}}>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+          <br>
+          <div class="row" style="align-items: center; margin: 0px;">
+            <div class="form-group col-lg-1">
+              <img src="{{ resenna.usuario.user_img }}" id="user_img" style="width: 50px; height: 50px;">
+            </div>
+            <div id="orden" class="form-group col-lg-8" >
+              <h4><a href="{% url 'profile' resenna.usuario.id %}">{{resenna.usuario}}</a></h4>
+            </div>
+            <div id="banno" class="form-group col-lg-3">
+              <h4 style="margin-left: 0px; text-align: right;">{{resenna.valoracion_general}} / 5.0</h4>
+            </div>
+          </div>
+          <div class="wrapper">
+            <div class="">
+              <p id="limpieza" style="margin-bottom: 0px;">Limpieza:</p>
+            </div>
+            <div class="">
+              <div id="limpieza" class="ver-calificacion">
+                {% if resenna.valoracion_limpieza == 5 %}
+                  <label for="5" class="cheked">★★★★★</label>
+                {% elif resenna.valoracion_limpieza == 4 %}
+                  <label for="4" class="cheked">★★★★</label>
+                  <label for="4" class="in-cheked">★</label>
+                {% elif resenna.valoracion_limpieza == 3 %}
+                  <label for="3" class="cheked">★★★</label>
+                  <label for="3" class="in-cheked">★★</label>
+                {% elif resenna.valoracion_limpieza == 2 %}
+                  <label for="2" class="cheked">★★</label>
+                  <label for="2" class="in-cheked">★★★</label>
+                {% elif resenna.valoracion_limpieza == 1 %}
+                  <label for="1" class="cheked">★</label>
+                  <label for="1" class="in-cheked">★★★★</label>
+                {% endif %}
+              </div>
+            </div>
+            <div class="">
+              <p id="comodidad" style="margin-bottom: 0px;">Comodidad:</p>
+            </div>
+            <div class="">
+              <div id="comodidad" class="ver-calificacion">
+                {% if resenna.valoracion_comodidad == 5 %}
+                  <label for="5" class="cheked">★★★★★</label>
+                {% elif resenna.valoracion_comodidad == 4 %}
+                  <label for="4" class="cheked">★★★★</label>
+                  <label for="4" class="in-cheked">★</label>
+                {% elif resenna.valoracion_comodidad == 3 %}
+                  <label for="3" class="cheked">★★★</label>
+                  <label for="3" class="in-cheked">★★</label>
+                {% elif resenna.valoracion_comodidad == 2 %}
+                  <label for="2" class="cheked">★★</label>
+                  <label for="2" class="in-cheked">★★★</label>
+                {% elif resenna.valoracion_comodidad == 1 %}
+                  <label for="1" class="cheked"">★</label>
+                  <label for="1" class="in-cheked">★★★★</label>
+                {% endif %}
+              </div>
+            </div>
+            <div class="">
+              <p id="disponibilidad" style="margin-bottom: 0px;">Disponibilidad:</p>
+            </div>
+            <div class="">
+              <div id="disponibilidad" class="ver-calificacion">
+                {% if resenna.valoracion_disponibilidad == 5 %}
+                  <label for="5" class="cheked">★★★★★</label>
+                {% elif resenna.valoracion_disponibilidad == 4 %}
+                  <label for="4" class="cheked"">★★★★</label>
+                  <label for="4" class="in-cheked">★</label>
+                {% elif resenna.valoracion_disponibilidad == 3 %}
+                  <label for="3" class="cheked"">★★★</label>
+                  <label for="3" class="in-cheked">★★</label>
+                {% elif resenna.valoracion_disponibilidad == 2 %}
+                  <label for="2" class="cheked">★★</label>
+                  <label for="2" class="in-cheked">★★★</label>
+                {% elif resenna.valoracion_disponibilidad == 1 %}
+                  <label for="1" class="cheked">★</label>
+                  <label for="1" class="in-cheked">★★★★</label>
+                {% endif %}
+              </div>
+            </div>
+            <div class="" >
+              <p id="comodidad" style="margin-bottom: 0px;">Utensilios:</p>
+            </div>
+            <div class="">
+              <div id="productos" class="ver-calificacion">
+                {% if resenna.valoracion_utensilios == 5 %}
+                  <label for="5" class="cheked">★★★★★</label>
+                {% elif resenna.valoracion_utensilios == 4 %}
+                  <label for="4" class="cheked">★★★★</label>
+                  <label for="4" class="in-cheked">★</label>
+                {% elif resenna.valoracion_utensilios == 3 %}
+                  <label for="3" class="cheked">★★★</label>
+                  <label for="3" class="in-cheked">★★</label>
+                {% elif resenna.valoracion_utensilios == 2 %}
+                  <label for="2" class="cheked">★★</label>
+                  <label for="2" class="in-cheked">★★★</label>
+                {% elif resenna.valoracion_utensilios == 1 %}
+                  <label for="1" class="cheked">★</label>
+                  <label for="1" class="in-cheked">★★★★</label>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <h6>Comentarios: </h6>
+          <p style="justify-content: center;"> {{resenna.contenido}}</p>
+
+          <div class="row" style="justify-content: left; align-items: center;">
+            <div class="form-group col-lg-3">
+              <button id="btn-ver-comentarios" class="btn-ver-comentario" style="cursor: pointer; font-style: italic;">Mostrar Comentarios</button>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="form-group col-lg-3">
+              <button id="btn-add-comentario" class="btn-add-comentario" style="cursor: pointer; font-style: italic;"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp; Responder</button>
+            </div>
+              {% if user != resenna.usuario %}
+                <div class="form-group col-lg-4">
+                  <p style="margin: 0px; color: rgb(58, 44, 44); text-align: right;font-style: italic;">¿Te ha sido útil esta reseña? </p>
+                </div>
+                <div class="form-group col-lg-1" style="padding: 10px; justify-content: right;">
+                  <button style="cursor: pointer; justify-content: right;"><i class="fa-sharp fa-solid fa-thumbs-up" style="color: #125f11;"></i></button>
+                </div>
+                <div class="form-group col-lg-1" style="padding: 10px; justify-content: right;">
+                  <button style="cursor: pointer;"><i class="fa-sharp fa-solid fa-thumbs-down" style="color: #9d0101;"></i></button>
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+
+        {% for comentario in comentarios %}
+          {% if comentario.resena.id_resenna == resenna.id_resenna %}
+          <div class="shadow-ver-comentario" id="shadow-ver-comentario">
+            <div class="row" style="align-items: center; margin: 0px;">
+              <div class="form-group col-lg-1">
+                <img src="{{ comentario.usuario.user_img }}" id="user_img" style="width: 30px; height: 30px;">
+              </div>
+              <div id="orden" class="form-group col-lg-9" >
+                <h6 style="margin-left: 0px; text-align: left;">{{comentario.usuario}}</h6>
+              </div>
+              {% if user.is_authenticated %}
+                {% if user == comentario.usuario %}
+                  <div class="col-lg-1">
+                    <a href="{% url 'update_comentario' resenna.id_resenna comentario.id_comentario %}">
+                    <button class="btn btn-warning" style="width: 40px; height: 40px; margin-bottom: 5px; cursor: pointer;">
+                      <i class="fa fa-pencil" style="color:black; width: 15px; height: 15px;"></i>
+                    </button></a>
+                  </div>
+                  <div class="col-lg-1">
+                  <button id="btn-delete-modal" class="btn btn-danger" style="width: 40px; height: 40px;cursor: pointer;"><i class="fa fa-trash"
+                      style="color:black; width: 15px; height: 15px;"></i></button>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+            
+            <p style="margin-left: 10px">{{comentario.contenido}}</p>
+          </div>
+          {% endif %}
+        {% endfor %}
+
+        <div class="shadow-comentario" id="shadow-comentario">
+          <form class="formulario" method="POST">
+            {% csrf_token %}
+            <div class="comment-form">
+            <textarea maxlength="300" name="comentario" id="comment" placeholder="Escriba tu comentario..."></textarea>
+            <p id="comment-error" class="error-message"></p>
+            </div>
+            <input type="hidden" id="idR" name="idR" value={{resenna.id_resenna}}>
+            <button type="submit" name="comentarioAdd" class="btn btn-success">Comentar</button>
+          </form>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </section>    
+
+    <section class="contact-us" id="contact">
+      <div class="footer">
+          <p style="color: white;">Copyright © 2023 Baños Beauchef. All Rights Reserved.
+      </div>
+    </section>
+
+    <script>
+      var modal_Delete = document.getElementById("delete-modal");
+      var btn_Delete = document.getElementById("btn-delete-modal");
+      var span_Close_Delete = document.getElementsByClassName("close-modal-delete")[0];
+      btn_Delete.onclick = function() {
+        modal_Delete.style.display = "block";
+      }
+      span_Close_Delete.onclick = function() {
+        modal_Delete.style.display = "none";
+      }
+      window.onclick = function(event) {
+        if (event.target == modal_Delete) {
+          modal_Delete.style.display = "none";
+        }
+      }
+      var btn_ver_comentario = document.querySelectorAll(".btn-ver-comentario");
+      var ver_comentario = document.querySelectorAll(".shadow-ver-comentario");
+      btn_ver_comentario.forEach(function(button) {
+        button.onclick = function() {
+          ver_comentario.forEach(function(div) {
+            if(div.style.display == "block"){
+              div.style.display = "none";
+            }
+            else{
+              div.style.display = "block";
+            }
+          });
+        }
+      });
+      var btn_add_comentario = document.querySelectorAll(".btn-add-comentario");
+      var form_comentario = document.querySelectorAll(".shadow-comentario");
+      btn_add_comentario.forEach(function(button) {
+        button.onclick = function() {
+          form_comentario.forEach(function(div) {
+            if(div.style.display == "block"){
+              div.style.display = "none";
+            }
+            else{
+              div.style.display = "block";
+            }
+          });
+        }
+      });
+      /*
+      var btn_ver_comentario = document.getElementById("btn-ver-comentario");
+      var ver__comentario = document.getElementById("shadow-ver-comentario");
+      btn_ver_comentario.forEach(function(button) {
+          btn_ver_comentario.onclick = function() {
+            if(ver__comentario.style.display == "block"){
+              ver__comentario .style.display = "none";
+            }
+            else{
+              ver__comentario .style.display = "block";
+            }
+          }
+      });*/
+
+    </script>
+    <script>
+
+    </script>
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'assets/js/isotope.min.js' %}"></script>
+<script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+<script src="{% static 'assets/js/lightbox.js' %}"></script>
+<script src="{% static 'assets/js/tabs.js' %}"></script>
+<script src="{% static 'assets/js/video.js' %}"></script>
+<script src="{% static 'assets/js/slick-slider.js' %}"></script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+  <script>
+    //according to loftblog tut
+    $('.nav li:first').addClass('active');
+
+    var showSection = function showSection(section, isAnimate) {
+      var
+      direction = section.replace(/#/, ''),
+      reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+      reqSectionPos = reqSection.offset().top - 0;
+
+      if (isAnimate) {
+        $('body, html').animate({
+          scrollTop: reqSectionPos },
+        600);
+      } else {
+        $('body, html').scrollTop(reqSectionPos);
+      }
+
+    };
+    </script>  
+
+  </body>
+</html>
